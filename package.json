@@ -21,5 +21,8 @@
     "rpi",
     "ble",
     "controller"
-  ]
+  ],
+  "dependencies": {
+    "touchberry": "^1.0.0"
+  }
 }
