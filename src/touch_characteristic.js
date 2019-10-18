@@ -22,11 +22,17 @@ class TouchCharacteristic extends bleno.Characteristic {
 
   onReadRequest(offset, callback) {
     try {
-      const keystate = this.controller.key_state();
-      console.log(`Returning keystate: ${keystate}`);
+      const keystates = this.controller.key_states();
+      let keyBits = 0;
+
+      keystates.forEach(key => {
+        if (key.state === 'pressed') keyBits |= (1 << key.key);
+      });
+
+      console.log(`Returning key states: ${keyBits}`);
 
       let data = Buffer.alloc(1);   // Single byte
-      data.writeUInt8(keystate, 0);
+      data.writeUInt8(keyBits, 0);
       callback(this.RESULT_SUCCESS, data);
     } catch (err) {
       console.error(err);

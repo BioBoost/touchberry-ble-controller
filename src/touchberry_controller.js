@@ -21,8 +21,8 @@ class TouchBerryController {
     this.ble_device.initialize();
   }
 
-  key_state() {
-    return 0x3e;
+  key_states() {
+    return this.shield.touch().key_states();
   }
 
   /////////////////////////////// Internal methods ///////////////////////////////
