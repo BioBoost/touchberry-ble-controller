@@ -8,6 +8,11 @@ class BLEDevice {
 
   initialize() {
     console.log("Starting bleno ...");
+
+    bleno.on("stateChange", state => {
+      if (state === "poweredOn") this._start_advertising();
+      else this._stop_advertising();
+    }); 
   }
 
   enable_diagnostics() {
@@ -19,6 +24,19 @@ class BLEDevice {
     bleno.on("servicesSetError", err => console.log("Bleno: servicesSetError"));
     bleno.on("accept", clientAddress => console.log(`Bleno: accept ${clientAddress}`));
     bleno.on("disconnect", clientAddress => console.log(`Bleno: disconnect ${clientAddress}`));
+  }
+
+  /////////////////////////////// Internal methods ///////////////////////////////
+
+  _start_advertising() {
+    bleno.startAdvertising(this.name, ['ecceef7c-2d85-4b1a-889b-5dd536de1d38'], err => {
+      if (err) console.log(err);
+    });
+  }
+
+  _stop_advertising() {
+    console.log("Stopping advertising...");
+    bleno.stopAdvertising();
   }
 
 }
