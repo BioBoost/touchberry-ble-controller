@@ -4,6 +4,7 @@
   "description": "Turn the TouchBerry Pi Shield into a BLE controller",
   "main": "src/controller.js",
   "scripts": {
+    "start": "node src/controller.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
