@@ -5,7 +5,7 @@ class TouchBerryController {
 
   constructor() {
     this.initialize_shield();
-    this.ble_device = new BLEDevice();
+    this.initialize_ble_device();
   }
 
   initialize_shield() {
@@ -13,6 +13,12 @@ class TouchBerryController {
     console.log(`Detected ${this.shield.revision()} board`);
 
     this.shield.touch().on('keydown', this.on_key_down);
+  }
+
+  initialize_ble_device() {
+    this.ble_device = new BLEDevice();
+    this.ble_device.enable_diagnostics();
+    this.ble_device.initialize();
   }
 
   on_key_down(event) {
