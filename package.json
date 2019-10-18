@@ -1,0 +1,25 @@
+{
+  "name": "touchberry-ble-controller",
+  "version": "1.0.0",
+  "description": "Turn the TouchBerry Pi Shield into a BLE controller",
+  "main": "src/controller.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BioBoost/touchberry-ble-controller.git"
+  },
+  "author": "Nico De Witte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BioBoost/touchberry-ble-controller/issues"
+  },
+  "homepage": "https://github.com/BioBoost/touchberry-ble-controller#readme",
+  "keywords": [
+    "touchberry",
+    "rpi",
+    "ble",
+    "controller"
+  ]
+}
