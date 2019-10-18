@@ -3,8 +3,9 @@ const ControllerService = require('./controller_service');
 
 class BLEDevice {
 
-  constructor(peripheral_name='ble-controller') {
+  constructor(controller, peripheral_name='ble-controller') {
     this.name = peripheral_name;
+    this.controller = controller;
   }
 
   initialize() {
@@ -35,7 +36,7 @@ class BLEDevice {
   /////////////////////////////// Internal methods ///////////////////////////////
 
   _start_advertising() {
-    bleno.startAdvertising(this.name, ['ecceef7c-2d85-4b1a-889b-5dd536de1d38'], err => {
+    bleno.startAdvertising(this.name, [ControllerService.UUID], err => {
       if (err) console.log(err);
     });
   }
@@ -49,7 +50,7 @@ class BLEDevice {
     console.log("Configuring services ...");
 
     bleno.setServices([
-      new bleno.PrimaryService(ControllerService)
+      new ControllerService(this.controller)
     ], err => {
       if(err) console.log(err);
       else console.log("Services configured");

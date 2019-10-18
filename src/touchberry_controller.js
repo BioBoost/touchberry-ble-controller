@@ -16,10 +16,16 @@ class TouchBerryController {
   }
 
   initialize_ble_device() {
-    this.ble_device = new BLEDevice();
+    this.ble_device = new BLEDevice(this);
     this.ble_device.enable_diagnostics();
     this.ble_device.initialize();
   }
+
+  key_state() {
+    return 0x3e;
+  }
+
+  /////////////////////////////// Internal methods ///////////////////////////////
 
   on_key_down(event) {
     console.log("Getting keydown event " + JSON.stringify(event));
