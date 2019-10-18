@@ -24,6 +24,6 @@
   ],
   "dependencies": {
     "@abandonware/bleno": "^0.5.1-1",
-    "touchberry": "^1.0.1"
+    "touchberry": "^1.0.2"
   }
 }
