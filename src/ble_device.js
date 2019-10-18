@@ -1,4 +1,5 @@
 const bleno = require("@abandonware/bleno");
+const ControllerService = require('./controller_service');
 
 class BLEDevice {
 
@@ -12,7 +13,12 @@ class BLEDevice {
     bleno.on("stateChange", state => {
       if (state === "poweredOn") this._start_advertising();
       else this._stop_advertising();
-    }); 
+    });
+
+    bleno.on("advertisingStart", err => {
+      if (err) console.error(err);
+      else this._initialize_services();
+    });
   }
 
   enable_diagnostics() {
@@ -37,6 +43,17 @@ class BLEDevice {
   _stop_advertising() {
     console.log("Stopping advertising...");
     bleno.stopAdvertising();
+  }
+
+  _initialize_services() {
+    console.log("Configuring services ...");
+
+    bleno.setServices([
+      new bleno.PrimaryService(ControllerService)
+    ], err => {
+      if(err) console.log(err);
+      else console.log("Services configured");
+    });
   }
 
 }
