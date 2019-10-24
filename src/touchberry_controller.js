@@ -11,8 +11,6 @@ class TouchBerryController {
   initialize_shield() {
     this.shield = TouchBerry.BoardBuilder.build();
     console.log(`Detected ${this.shield.revision()} board`);
-
-    this.shield.touch().on('keydown', this.on_key_down);
   }
 
   initialize_ble_device() {
@@ -25,10 +23,8 @@ class TouchBerryController {
     return this.shield.touch().key_states();
   }
 
-  /////////////////////////////// Internal methods ///////////////////////////////
-
-  on_key_down(event) {
-    console.log("Getting keydown event " + JSON.stringify(event));
+  on_touch(callback) {
+    this.shield.touch().on('keychange', callback);
   }
 }
 
