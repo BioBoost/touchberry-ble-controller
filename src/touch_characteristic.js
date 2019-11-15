@@ -18,6 +18,7 @@ class TouchCharacteristic extends bleno.Characteristic {
     });
 
     this.controller = controller;
+    this.controller.on_touch((event) => this.sendNotificationOfKeyChange(event));
   }
 
   onReadRequest(offset, callback) {
@@ -37,7 +38,6 @@ class TouchCharacteristic extends bleno.Characteristic {
   onSubscribe(maxValueSize, updateTouchStateCallback) {
     console.log(`Client subscribed to touch characteristic`);
     this.updateTouchStateCallback = updateTouchStateCallback;
-    this.controller.on_touch((event) => this.sendNotificationOfKeyChange(event));
   }
 
   onUnsubscribe() {
