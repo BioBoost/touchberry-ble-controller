@@ -35,6 +35,10 @@ class TouchBerryController {
   on_touch(callback) {
     this.shield.touch().on('keychange', callback);
   }
+
+  get_id() {
+    return this.id;
+  }
 }
 
 module.exports = TouchBerryController;

@@ -1,5 +1,6 @@
 const bleno = require("@abandonware/bleno");
 const ControllerService = require('./controller_service');
+const InfoService = require('./info_service');
 
 class BLEDevice {
 
@@ -50,7 +51,8 @@ class BLEDevice {
     console.log("Configuring services ...");
 
     bleno.setServices([
-      new ControllerService(this.controller)
+      new ControllerService(this.controller),
+      new InfoService(this.controller)
     ], err => {
       if(err) console.log(err);
       else console.log("Services configured");

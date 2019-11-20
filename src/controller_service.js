@@ -3,7 +3,7 @@ const bleno = require("@abandonware/bleno");
 
 class ControllerService extends bleno.PrimaryService {
 
-  static UUID = 'ecceef7c-2d85-4b1a-889b-5dd536de1d38';
+  static UUID = '83aa3936-2d63-4369-9875-d7b7a20540dd';
 
   constructor(controller) {
     super({
