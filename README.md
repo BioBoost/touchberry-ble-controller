@@ -80,5 +80,5 @@ First make sure to alter the `config.json` file. It's mounted to the container s
 To launch it just use
 
 ```shell
-docker-compose -d up
+docker-compose up -d
 ```
