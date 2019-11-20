@@ -8,11 +8,13 @@ RUN apt install -y bluetooth bluez libbluetooth-dev libudev-dev
 # Setup a working directory for our app
 WORKDIR /app
 
+# First npm install. Makes for faster image building
+COPY package.json .
+COPY package-lock.json .
+RUN npm install
+
 # Copy the application files
 COPY . .
-
-# Install the node modules
-RUN npm install
 
 # The final command that starts the app
 CMD ["node", "src/controller.js"]
