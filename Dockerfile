@@ -15,4 +15,6 @@ COPY . .
 RUN npm install
 
 # The final command that starts the app
-CMD ["npm", "start"]
+CMD ["node", "src/controller.js"]
+  # Can't use npm here, it doesn't pass the kill signals
+  # as it should, in term not allowing us to gracefully shut down the controller
