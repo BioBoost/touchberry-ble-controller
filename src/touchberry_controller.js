@@ -39,6 +39,10 @@ class TouchBerryController {
   get_id() {
     return this.id;
   }
+
+  stop() {
+    this.shield.rgbledbar().all_off();
+  }
 }
 
 module.exports = TouchBerryController;
