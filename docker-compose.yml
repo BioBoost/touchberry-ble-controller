@@ -1,0 +1,11 @@
+version: '3'
+services:
+  controller:
+    build:
+      context: .
+    image: "ble-touch-berry:latest"
+    restart: unless-stopped
+    volumes:
+      - "./config.json:/app/config.json"
+    privileged: true
+    network_mode: host
