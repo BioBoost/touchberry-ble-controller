@@ -22,7 +22,6 @@ class IdCharacteristic extends bleno.Characteristic {
 
   onReadRequest(offset, callback) {
     try {
-      // this.updateTouchStateCallback(Buffer.from(this.controller.get_id()));
       callback(this.RESULT_SUCCESS, Buffer.from(this.controller.get_id()));
     } catch (err) {
       console.error(err);
