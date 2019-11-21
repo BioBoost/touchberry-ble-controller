@@ -1,10 +1,12 @@
 const bleno = require("@abandonware/bleno");
 const ControllerService = require('./controller_service');
 const InfoService = require('./info_service');
+const EventEmitter = require('events');
 
-class BLEDevice {
+class BLEDevice extends EventEmitter {
 
   constructor(controller, peripheral_name='ble-controller') {
+    super();
     this.name = peripheral_name;
     this.controller = controller;
   }
@@ -21,6 +23,9 @@ class BLEDevice {
       if (err) console.error(err);
       else this._initialize_services();
     });
+
+    bleno.on('accept', () => this.emit('connected'));
+    bleno.on('disconnect', () => this.emit('disconnected'));
   }
 
   enable_diagnostics() {
