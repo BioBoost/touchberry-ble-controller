@@ -3,7 +3,7 @@ services:
   controller:
     build:
       context: .
-    image: "ble-touch-berry:latest"
+    image: "vivesdevbit/touchberry-ble-controller:latest"
     restart: unless-stopped
     volumes:
       - "./config.json:/app/config.json"

@@ -82,3 +82,13 @@ To launch it just use
 ```shell
 docker-compose up -d
 ```
+
+## Pushing to DockerHub
+
+Change version (tagname) as needed
+
+```shell
+docker login --username <username>
+docker tag vivesdevbit/touchberry-ble-controller vivesdevbit/touchberry-ble-controller:v1.0.0
+docker push vivesdevbit/touchberry-ble-controller:v1.0.0
+```
