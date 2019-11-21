@@ -23,7 +23,7 @@ class TouchBerryController {
   }
 
   initialize_ble_device() {
-    this.ble_device = new BLEDevice(this);
+    this.ble_device = new BLEDevice(this, `ble-controller-${this.id}`);
     this.ble_device.enable_diagnostics();
     this.ble_device.initialize();
   }
