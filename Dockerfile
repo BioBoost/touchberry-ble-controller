@@ -9,8 +9,7 @@ RUN apt install -y bluetooth bluez libbluetooth-dev libudev-dev
 WORKDIR /app
 
 # First npm install. Makes for faster image building
-COPY package.json .
-COPY package-lock.json .
+COPY package*.json .
 RUN npm install
 
 # Copy the application files
