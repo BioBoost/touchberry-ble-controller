@@ -6,7 +6,7 @@ Turning the TouchBerry Pi in a BLE controller.
 
 ## Enable I2C
 
-```shell
+```bash
 sudo raspi-config
 ```
 
@@ -14,7 +14,7 @@ Select `Interfacing Options` and enable the `I2C` interface.
 
 ## Running the app
 
-```shell
+```bash
 npm install
 sudo npm start
 ```
@@ -25,7 +25,7 @@ sudo npm start
 
 Install docker on the raspberry pi
 
-```shell
+```bash
 sudo apt update
 curl -sSL https://get.docker.com/ | sh
 sudo usermod -aG docker pi
@@ -33,7 +33,7 @@ sudo usermod -aG docker pi
 
 Install docker compose
 
-```shell
+```bash
 sudo apt install libffi-dev libssl-dev
 sudo apt install python-backports.ssl-match-hostname
 sudo apt install python-pip
@@ -42,7 +42,7 @@ sudo pip install docker-compose
 
 Make sure to disable the bluetooth daemon
 
-```shell
+```bash
 sudo systemctl stop bluetooth
 sudo systemctl disable bluetooth
 ```
@@ -51,13 +51,13 @@ sudo systemctl disable bluetooth
 
 Build the image using docker-compose
 
-```shell
+```bash
 docker-compose build
 ```
 
 or pure docker
 
-```shell
+```bash
 docker build -t ble-touch-berry .
 ```
 
@@ -65,13 +65,13 @@ docker build -t ble-touch-berry .
 
 Running shell
 
-```shell
+```bash
 docker run --rm --net=host --privileged -i -t ble-touch-berry /bin/bash
 ```
 
 No-shell
 
-```shell
+```bash
 docker run --rm --net=host --privileged -i -t ble-touch-berry
 ```
 
@@ -81,7 +81,7 @@ First make sure to alter the `config.json` file. It's mounted to the container s
 
 To launch it just use
 
-```shell
+```bash
 docker-compose up -d
 ```
 
@@ -89,7 +89,7 @@ docker-compose up -d
 
 Change version (tagname) as needed
 
-```shell
+```bash
 docker login --username <username>
 docker tag vivesdevbit/touchberry-ble-controller vivesdevbit/touchberry-ble-controller:v1.0.0
 docker push vivesdevbit/touchberry-ble-controller:v1.0.0
