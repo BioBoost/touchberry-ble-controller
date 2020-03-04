@@ -2,6 +2,8 @@
 
 Turning the TouchBerry Pi in a BLE controller.
 
+![TouchBerry Pi Shield](./img/touchberry-pi-v3.jpg)
+
 ## Enable I2C
 
 ```shell
