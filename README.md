@@ -21,6 +21,7 @@ First make sure to alter the `config.json` file. It's mounted to the container s
 To launch it just use
 
 ```bash
+cd && cd touchberry-ble-controller
 docker-compose up -d
 ```
 
