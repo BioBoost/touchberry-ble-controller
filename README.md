@@ -11,7 +11,7 @@ Turning the TouchBerry Pi in a BLE controller.
 This repo includes a bash script that can be run on a freshly installed Raspberry Pi 4 to setup the full controller and all its dependencies.
 
 ```bash
-bash <(curl -sL https://raw.githubusercontent.com/BioBoost/touchberry-ble-controller/master/rpisetup)
+sudo su - -c "bash <(curl -sL https://raw.githubusercontent.com/BioBoost/touchberry-ble-controller/master/rpisetup)"
 ```
 
 ### Launching the container
