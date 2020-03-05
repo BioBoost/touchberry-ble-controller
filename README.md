@@ -4,48 +4,36 @@ Turning the TouchBerry Pi in a BLE controller.
 
 ![TouchBerry Pi Shield](./img/touchberry-pi-v3.jpg)
 
-## Enable I2C
+## Deployment with Docker
+
+### Launch the RPi Setup Script
+
+This repo includes a bash script that can be run on a freshly installed Raspberry Pi 4 to setup the full controller and all its dependencies.
 
 ```bash
-sudo raspi-config
+bash <(curl -sL https://raw.githubusercontent.com/BioBoost/touchberry-ble-controller/master/rpisetup)
 ```
 
-Select `Interfacing Options` and enable the `I2C` interface.
+### Launching the container
 
-## Running the app
+First make sure to alter the `config.json` file. It's mounted to the container so you don't have to rebuild after changing it.
+
+To launch it just use
+
+```bash
+docker-compose up -d
+```
+
+## Development
+
+### Running the app without Docker
 
 ```bash
 npm install
 sudo npm start
 ```
 
-## Docker
-
-### Raspberry Pi Setup
-
-Install docker on the raspberry pi
-
-```bash
-sudo apt update
-curl -sSL https://get.docker.com/ | sh
-sudo usermod -aG docker pi
-```
-
-Install docker compose
-
-```bash
-sudo apt install libffi-dev libssl-dev
-sudo apt install python-backports.ssl-match-hostname
-sudo apt install python-pip
-sudo pip install docker-compose
-```
-
-Make sure to disable the bluetooth daemon
-
-```bash
-sudo systemctl stop bluetooth
-sudo systemctl disable bluetooth
-```
+Make sure to run as `sudo`. App will not give error but will not be able to start advertising.
 
 ### Building the image
 
@@ -75,17 +63,7 @@ No-shell
 docker run --rm --net=host --privileged -i -t ble-touch-berry
 ```
 
-### Launching the container
-
-First make sure to alter the `config.json` file. It's mounted to the container so you don't have to rebuild after changing it.
-
-To launch it just use
-
-```bash
-docker-compose up -d
-```
-
-## Pushing to DockerHub
+### Pushing to DockerHub
 
 Change version (tagname) as needed
 
