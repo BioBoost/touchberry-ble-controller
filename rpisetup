@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+echo "Setting up RPi as BLE Touchberry Controller"
+
+# Check if sudo is used
+if [ "$(id -u)" != 0 ]; then
+  echo 'You need to run this script with sudo'
+  exit 1
+fi
+
+if grep -q 'Raspberry Pi 4 Model B' /proc/cpuinfo; then
+  echo 'Running on Raspberry Pi 4 ... All ok'
+else
+  echo 'This project is currently only support Raspberry Pi 4'
+  exit 2
+fi
+
+echo "Install updates and some dependencies ..."
+
+apt -y update
+apt -y upgrade
+apt -y install git
+
+echo "Enabling i2c"
+
+if grep -wq 'i2c-dev' /etc/modules; then
+  echo 'Seems i2c-dev module already exists, skipping this step.'
+else
+  echo 'i2c-dev' >> /etc/modules
+fi
+
+if grep -wq 'dtparam=i2c_arm=on' /boot/config.txt; then
+  echo 'Seems i2c_arm parameter already set, skipping this step.'
+else
+  echo 'dtparam=i2c_arm=on' >> /boot/config.txt
+fi
+
+# Set Locale and Timezone
+
+echo "Setting up locale and Timezone"
+
+if grep -wq 'en_US.UTF-8' /etc/locale.gen; then
+  echo 'Seems locale already available, skipping this step.'
+else
+  sed -i '/en_US.UTF-8 UTF-8/s/^#//g' /etc/locale.gen
+  locale-gen
+  localectl set-locale LANG=en_US.UTF-8
+  localectl set-locale LANGUAGE=en_US
+  # Make locale affect current shell
+  . /etc/default/locale
+fi
+
+echo "Setting timezone to Europe/Brussels ...";
+timedatectl set-timezone Europe/Brussels
+
+# Install Docker
+
+echo "Installing docker ..."
+
+curl -sSL https://get.docker.com/ | sh
+usermod -aG docker pi
+
+# Install docker compose
+
+echo "Installing docker compose ..."
+
+apt -y install libffi-dev libssl-dev python3 python3-pip
+apt -y remove python-configparser
+pip3 install docker-compose
+
+# Disable bluetooth daemon
+
+echo "Disabling bluetooth daemon"
+
+systemctl stop bluetooth
+systemctl disable bluetooth
+
+# Fetching repo if first time
+
+if [[ -d /home/pi/touchberry-ble-controller ]]
+then
+  echo "Repository already exists. Skipping this step."
+else
+  su - pi -c "cd /home/pi && git clone https://github.com/BioBoost/touchberry-ble-controller.git"
+fi
+
+echo "Done. Hopefully all went well. Rebooting in 10 seconds."
+
+sleep 10
+reboot
