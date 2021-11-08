@@ -77,6 +77,10 @@ echo "Disabling bluetooth daemon"
 systemctl stop bluetooth
 systemctl disable bluetooth
 
+# Fetch our ssh keys
+sudo --user pi ssh-import-id-gh bioboost
+sudo --user pi ssh-import-id-gh sillevl
+
 # Fetching repo if first time
 
 if [[ -d /home/pi/touchberry-ble-controller ]]
